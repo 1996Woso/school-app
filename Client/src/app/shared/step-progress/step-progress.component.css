@@ -1,0 +1,81 @@
+.step-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 30px 0;
+  position: relative;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.circle {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #999;
+  transition: all 0.3s ease;
+}
+
+.circle.active {
+  background-color: #025752;
+  border-color: #025752;
+  color: white;
+}
+
+.line {
+  width: 250px;
+  height: 3px;
+  background-color: #ccc;
+  margin: 0 10px;
+  transition: background-color 0.3s ease;
+}
+
+.line.active {
+  background-color: #025752;
+}
+
+.label {
+  position: absolute;
+  top: 45px;
+  width: 100px;
+  text-align: start;
+  font-size: 12px;
+  color: #333;
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  .circle {
+    width: 25px;
+    height: 25px;
+  }
+  .label {
+    font-size: 7px;
+  }
+  .line {
+    width: 40px;
+    height: 3px;
+  }
+}
+@media (max-width: 1280px) {
+  .circle {
+    width: 25px;
+    height: 25px;
+  }
+  .label {
+    font-size: 7px;
+  }
+  .line {
+    width: 50px;
+    height: 3px;
+  }
+}

@@ -1,0 +1,344 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
+    <div class="container mt-3">
+          <app-step-progress
+            [currentStep]="currentStep()"
+            [steps]="steps"
+            [completedSteps]="completedSteps()"
+          />
+      <!-- Step 1: Student Info -->
+      <div *ngIf="step === 1">
+        <div class="row">
+          <div class="col-12">
+            <h4 class="text-center">Students Information</h4>
+          </div>
+        </div>
+        <form [formGroup]="studentForm">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-text-input
+                [formControl]="$any(studentForm.controls['firstName'])"
+                [label]="'First Name'"
+              />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-text-input
+                [formControl]="$any(studentForm.controls['secondName'])"
+                [label]="'Second Name'"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-text-input
+                [formControl]="$any(studentForm.controls['lastName'])"
+                [label]="'Last Name'"
+              />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <label style="margin-right: 2rem"><b>Gender:</b></label>
+              <label class="form-check-label me-6">
+                <input
+                  type="radio"
+                  class="form-check-input"
+                  value="male"
+                  formControlName="gender"
+                />&nbsp; <i class="bi bi-gender-male"></i> Male
+              </label>
+              &nbsp;&nbsp;
+              <label class="form-check-label">
+                <input
+                  type="radio"
+                  class="form-check-input"
+                  value="female"
+                  formControlName="gender"
+                />&nbsp; <i class="bi bi-gender-female"></i> Female
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-text-input
+                [formControl]="$any(studentForm.controls['identityNumber'])"
+                [label]="'Id No'"
+              />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-date-picker
+                [formControl]="$any(studentForm.controls['dateOfBirth'])"
+                [label]="'Date Of Birth'"
+                [maxDate]="studentMinAge"
+                [minDate]="maxAge"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-text-input
+                [formControl]="$any(studentForm.controls['phone'])"
+                [label]="'Phone No'"
+              />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-text-input
+                [formControl]="$any(studentForm.controls['email'])"
+                [label]="'Email'"
+              />
+            </div>
+          </div>
+
+          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+            <app-next-button (click)="next()" [disabled]="!studentForm.valid" />
+          </div>
+        </form>
+      </div>
+
+      <!-- Step 2: Student Address -->
+      <div *ngIf="step === 2">
+        <div class="row">
+          <div class="col-12">
+            <h4 class="text-center">Students Address</h4>
+          </div>
+        </div>
+        <form [formGroup]="studentAddressForm">
+          <div class="row">
+            <div
+              class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
+            >
+              <app-text-input
+                [formControl]="$any(studentAddressForm.controls['street'])"
+                [label]="'Street'"
+              />
+            </div>
+            <div
+              class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
+            >
+              <app-text-input
+                [formControl]="$any(studentAddressForm.controls['suburb'])"
+                [label]="'Suburb'"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div
+              class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
+            >
+              <app-text-input
+                [formControl]="$any(studentAddressForm.controls['city'])"
+                [label]="'City'"
+              />
+            </div>
+
+            <div
+              class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
+            >
+              <app-text-input
+                [formControl]="$any(studentAddressForm.controls['province'])"
+                [label]="'Province'"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div
+              class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
+            >
+              <app-text-input
+                [formControl]="$any(studentAddressForm.controls['country'])"
+                [label]="'Country'"
+              />
+            </div>
+            <div
+              class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
+            >
+              <app-text-input
+                [formControl]="$any(studentAddressForm.controls['postalCode'])"
+                [label]="'Postal Code'"
+              />
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <app-back-button (click)="back()" />
+            <app-next-button
+              (click)="next()"
+              [disabled]="!studentAddressForm.valid"
+            />
+          </div>
+        </form>
+      </div>
+      <!-- Step 3: Guardian Info -->
+      <div *ngIf="step === 3">
+        <div class="col-12">
+          <h4 class="text-center">Guardian Information</h4>
+        </div>
+        <form [formGroup]="guardianForm">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-text-input
+                [formControl]="$any(guardianForm.controls['firstName'])"
+                [label]="'First Name'"
+              />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-text-input
+                [formControl]="$any(guardianForm.controls['secondName'])"
+                [label]="'Second Name'"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-text-input
+                [formControl]="$any(guardianForm.controls['lastName'])"
+                [label]="'Last Name'"
+              />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <label style="margin-right: 2rem"><b>Gender:</b></label>
+              <label class="form-check-label me-6">
+                <input
+                  type="radio"
+                  class="form-check-input"
+                  value="male"
+                  formControlName="gender"
+                />&nbsp; <i class="bi bi-gender-male"></i> Male
+              </label>
+              &nbsp;&nbsp;
+              <label class="form-check-label">
+                <input
+                  type="radio"
+                  class="form-check-input"
+                  value="female"
+                  formControlName="gender"
+                />&nbsp; <i class="bi bi-gender-female"></i> Female
+              </label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-text-input
+                [formControl]="$any(guardianForm.controls['identityNumber'])"
+                [label]="'Id No'"
+              />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-text-input
+                [formControl]="$any(guardianForm.controls['relationship'])"
+                [label]="'Relationship'"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-text-input
+                [formControl]="$any(guardianForm.controls['phone'])"
+                [label]="'Phone No'"
+              />
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-text-input
+                [formControl]="$any(guardianForm.controls['email'])"
+                [label]="'Email'"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
+              <app-date-picker
+                [formControl]="$any(guardianForm.controls['dateOfBirth'])"
+                [label]="'Date Of Birth'"
+                [maxDate]="guardianMinAge"
+                [minDate]="maxAge"
+              />
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <app-back-button (click)="back()" />
+            <app-next-button
+              (click)="next()"
+              [disabled]="!guardianForm.valid"
+            />
+          </div>
+        </form>
+      </div>
+      <!-- Step 4: Guardian Address -->
+      <div *ngIf="step === 4">
+        <div class="row">
+          <div class="col-12">
+            <h4 class="text-center">Guardian Address</h4>
+          </div>
+        </div>
+        <form [formGroup]="guardianAddressForm">
+          <div class="row">
+            <div
+              class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
+            >
+              <app-text-input
+                [formControl]="$any(guardianAddressForm.controls['street'])"
+                [label]="'Street'"
+              />
+            </div>
+            <div
+              class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
+            >
+              <app-text-input
+                [formControl]="$any(guardianAddressForm.controls['suburb'])"
+                [label]="'Suburb'"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div
+              class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
+            >
+              <app-text-input
+                [formControl]="$any(guardianAddressForm.controls['city'])"
+                [label]="'City'"
+              />
+            </div>
+
+            <div
+              class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
+            >
+              <app-text-input
+                [formControl]="$any(guardianAddressForm.controls['province'])"
+                [label]="'Province'"
+              />
+            </div>
+          </div>
+          <div class="row">
+            <div
+              class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
+            >
+              <app-text-input
+                [formControl]="$any(guardianAddressForm.controls['country'])"
+                [label]="'Country'"
+              />
+            </div>
+            <div
+              class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
+            >
+              <app-text-input
+                [formControl]="$any(guardianAddressForm.controls['postalCode'])"
+                [label]="'Postal Code'"
+              />
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <app-back-button (click)="back()" />
+            <!-- <button
+              class="btn btn-dark"
+              (click)="register()"
+              [disabled]="!guardianAddressForm.valid && !sameAddress"
+            >
+              Submit 
+            </button> -->
+            <app-submit-button
+              (click)="register()"
+              [disabled]="!guardianAddressForm.valid && !sameAddress"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

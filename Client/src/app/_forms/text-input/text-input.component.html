@@ -1,0 +1,32 @@
+<div class="mb-3 form-floating">
+  <input
+  [class.is-invalid]="control.invalid && control.touched"
+    [type]="type()"
+    class="form-control"
+    [formControl]="control"
+    placeholder="{{ label() }}"
+  />
+  <label
+    ><b>{{ label() }}</b></label
+  >
+  <!--Required validation-->
+  <div *ngIf="control.hasError('required')" class="invalid-feedback text-start">
+    {{ label() }} is required.
+  </div>
+  <!--Minimum length validation-->
+  <div
+    *ngIf="control.hasError('minlength')"
+    class="invalid-feedback text-start"
+  >
+    {{ label() }} must be at least
+    {{control.errors?.['minlength'].requiredLength}} characters long.
+  </div>
+  <!--Maximum length validation-->
+  <div
+    *ngIf="control.hasError('maxlength')"
+    class="invalid-feedback text-start"
+  >
+    {{ label() }} must be at most
+    {{control.errors?.['maxlength'].requiredLength}} characters long.
+  </div>
+</div>

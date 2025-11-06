@@ -1,0 +1,11 @@
+:host {
+  display: inline-block;
+}
+.icon {
+  display: inline-block;
+  margin-left: 0.5rem;
+  transition: transform 0.2a ease-in-out;
+}
+:host:hover .icon {
+  transform: translateX(4px);
+}

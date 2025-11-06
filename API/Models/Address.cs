@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json.Serialization;
 
 namespace API.Models;
 
@@ -13,6 +14,8 @@ public class Address
     public required string PostalCode { get; set; }
 
     //Navigation
-    public ICollection<Student> Students = [];
-    public ICollection<Guardian> Guardians = [];
+    [JsonIgnore]//stop JSON serialization from recursing endlessly.
+    public ICollection<Student> Students { get; set; } = [];
+    [JsonIgnore]
+    public ICollection<Guardian> Guardians  { get; set; } = [];
 }
