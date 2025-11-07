@@ -1,1 +1,10 @@
-<div class=""
+<div class="row mb-3" [ngClass]="containerClass()">
+  <div class="col-12">
+    <p class="text-center">
+      <ng-content select="[heading-intro]"/>
+    </p>
+    <p [ngClass]="titleClass()"><ng-content select="[heading-title]"/></p>
+    <p [ngClass]="subClass()"><ng-content select="[heading-sub]"/></p>
+  </div>
+</div>
+

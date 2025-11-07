@@ -1,18 +1,24 @@
 <div class="row justify-content-center">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
     <div class="container mt-3">
-          <app-step-progress
-            [currentStep]="currentStep()"
-            [steps]="steps"
-            [completedSteps]="completedSteps()"
-          />
+      <app-step-progress
+        [currentStep]="currentStep()"
+        [steps]="steps"
+        [completedSteps]="completedSteps()"
+      />
       <!-- Step 1: Student Info -->
       <div *ngIf="step === 1">
-        <div class="row">
-          <div class="col-12">
-            <h4 class="text-center">Students Information</h4>
-          </div>
-        </div>
+        <app-heading
+          [containerClass]="{
+            heading: true,
+            'custom-shadow': isShadowEnabled
+          }"
+          [titleClass]="['heading-title']"
+          [subClass]="subClassObject"
+        >
+          <span heading-title>Student's Information</span>
+        </app-heading>
+
         <form [formGroup]="studentForm">
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
@@ -37,23 +43,29 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <label style="margin-right: 2rem"><b>Gender:</b></label>
-              <label class="form-check-label me-6">
-                <input
-                  type="radio"
-                  class="form-check-input"
-                  value="male"
-                  formControlName="gender"
-                />&nbsp; <i class="bi bi-gender-male"></i> Male
-              </label>
+              <app-radio-input
+                [label]="'Male'"
+                [name]="'gender'"
+                [value]="'male'"
+                [formControl]="$any(studentForm.controls['gender'])"
+              >
+                <span icon> &nbsp; <i class="bi bi-gender-male"></i> </span>
+              </app-radio-input>
               &nbsp;&nbsp;
-              <label class="form-check-label">
-                <input
-                  type="radio"
-                  class="form-check-input"
-                  value="female"
-                  formControlName="gender"
-                />&nbsp; <i class="bi bi-gender-female"></i> Female
-              </label>
+              <app-radio-input
+                [label]="'Female'"
+                [name]="'gender'"
+                [value]="'female'"
+                [formControl]="$any(studentForm.controls['gender'])"
+              >
+                <span icon> &nbsp; <i class="bi bi-gender-female"></i> </span>
+              </app-radio-input>
+              <div
+                *ngIf="studentForm.controls['gender'].invalid && studentForm.controls['gender'].touched"
+                class="invalid-feedback text-start"
+              >
+              Gender is required.
+              </div>
             </div>
           </div>
           <div class="row">
@@ -95,11 +107,16 @@
 
       <!-- Step 2: Student Address -->
       <div *ngIf="step === 2">
-        <div class="row">
-          <div class="col-12">
-            <h4 class="text-center">Students Address</h4>
-          </div>
-        </div>
+        <app-heading
+          [containerClass]="{
+            heading: true,
+            'custom-shadow': isShadowEnabled
+          }"
+          [titleClass]="['heading-title']"
+          [subClass]="subClassObject"
+        >
+          <span heading-title>Student's Address</span>
+        </app-heading>
         <form [formGroup]="studentAddressForm">
           <div class="row">
             <div
@@ -167,9 +184,13 @@
       </div>
       <!-- Step 3: Guardian Info -->
       <div *ngIf="step === 3">
-        <div class="col-12">
-          <h4 class="text-center">Guardian Information</h4>
-        </div>
+        <app-heading
+          [containerClass]="{ heading: true, 'custom-shadow': isShadowEnabled }"
+          [titleClass]="['heading-title']"
+          [subClass]="subClassObject"
+        >
+          <span heading-title>Guardian's Information</span>
+        </app-heading>
         <form [formGroup]="guardianForm">
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
@@ -194,23 +215,29 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <label style="margin-right: 2rem"><b>Gender:</b></label>
-              <label class="form-check-label me-6">
-                <input
-                  type="radio"
-                  class="form-check-input"
-                  value="male"
-                  formControlName="gender"
-                />&nbsp; <i class="bi bi-gender-male"></i> Male
-              </label>
+              <app-radio-input
+                [label]="'Male'"
+                [name]="'gender'"
+                [value]="'male'"
+                [formControl]="$any(guardianForm.controls['gender'])"
+              >
+                <span icon> &nbsp; <i class="bi bi-gender-male"></i> </span>
+              </app-radio-input>
               &nbsp;&nbsp;
-              <label class="form-check-label">
-                <input
-                  type="radio"
-                  class="form-check-input"
-                  value="female"
-                  formControlName="gender"
-                />&nbsp; <i class="bi bi-gender-female"></i> Female
-              </label>
+              <app-radio-input
+                [label]="'Female'"
+                [name]="'gender'"
+                [value]="'female'"
+                [formControl]="$any(guardianForm.controls['gender'])"
+              >
+                <span icon> &nbsp; <i class="bi bi-gender-female"></i> </span>
+              </app-radio-input>
+                 <div
+                *ngIf="studentForm.controls['gender'].invalid && guardianForm.controls['gender'].touched"
+                class="invalid-feedback text-start"
+              >
+              Gender is required.
+              </div>
             </div>
           </div>
           <div class="row">
@@ -262,11 +289,13 @@
       </div>
       <!-- Step 4: Guardian Address -->
       <div *ngIf="step === 4">
-        <div class="row">
-          <div class="col-12">
-            <h4 class="text-center">Guardian Address</h4>
-          </div>
-        </div>
+        <app-heading
+          [containerClass]="{ heading: true, 'custom-shadow': isShadowEnabled }"
+          [titleClass]="['heading-title']"
+          [subClass]="subClassObject"
+        >
+          <span heading-title>Guardian's Address</span>
+        </app-heading>
         <form [formGroup]="guardianAddressForm">
           <div class="row">
             <div

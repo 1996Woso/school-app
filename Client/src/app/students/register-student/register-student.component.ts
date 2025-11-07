@@ -21,6 +21,8 @@ import { BackButtonComponent } from '../../shared/back-button/back-button.compon
 import { NextButtonComponent } from '../../shared/next-button/next-button.component';
 import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.component';
 import { StepProgressComponent } from '../../shared/step-progress/step-progress.component';
+import { HeadingComponent } from '../../shared/heading/heading.component';
+import { RadioInputComponent } from '../../_forms/radio-input/radio-input.component';
 
 @Component({
   selector: 'app-register-student',
@@ -33,11 +35,16 @@ import { StepProgressComponent } from '../../shared/step-progress/step-progress.
     NextButtonComponent,
     SubmitButtonComponent,
     StepProgressComponent,
+    HeadingComponent,
+    RadioInputComponent
   ],
   templateUrl: './register-student.component.html',
   styleUrl: './register-student.component.css',
 })
 export class RegisterStudentComponent implements OnInit {
+  isShadowEnabled = true;
+  dynamicTitleClass = 'text-success';
+  subClassObject = { 'heading-sub': true, 'text-muted': false };
   private formBuilder = inject(FormBuilder);
   private studentService = inject(StudentService);
   step: number = 1;
@@ -73,8 +80,6 @@ export class RegisterStudentComponent implements OnInit {
     this.guardianAddressForm.statusChanges.subscribe(() =>
       this.updateCompletedSteps()
     );
-
-    this.updateCompletedSteps();
   }
   next() {
     this.step++;
@@ -213,7 +218,6 @@ export class RegisterStudentComponent implements OnInit {
     this.studentService.registerStudent(payload).subscribe({
       next: () => alert('Sudent registerd successfully!'),
       error: (error) => {
-        console.log(error.error);
         alert('Error: ' + error.error);
       },
     });

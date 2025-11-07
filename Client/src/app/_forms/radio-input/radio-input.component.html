@@ -1,0 +1,14 @@
+<label class="form-check-label">
+  <input
+    class="form-check-input"
+    [type]="type()"
+    [value]="value()"
+    (change)="onInputChange($event)"
+    [checked]="control.value === value()"
+    [name]="name()"
+  />
+  <ng-content select="[icon]" />
+  {{ label() }}
+</label>
+
+
