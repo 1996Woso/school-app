@@ -29,6 +29,7 @@ public class AddressRepository(DataContext dataContext) : IAddressRepository
     {
         return await dataContext.Addresses.FirstOrDefaultAsync(x =>
             x.Street == studentDTO.AddressDTO.Street &&
+            x.Suburb == studentDTO.AddressDTO.Suburb &&
             x.City == studentDTO.AddressDTO.City &&
             x.Province == studentDTO.AddressDTO.Province &&
             x.Country == studentDTO.AddressDTO.Country &&
@@ -38,6 +39,7 @@ public class AddressRepository(DataContext dataContext) : IAddressRepository
     {
         return await dataContext.Addresses.FirstOrDefaultAsync(x =>
             x.Street == guardianDTO.AddressDTO.Street &&
+            x.Suburb == guardianDTO.AddressDTO.Suburb &&
             x.City == guardianDTO.AddressDTO.City &&
             x.Province == guardianDTO.AddressDTO.Province &&
             x.Country == guardianDTO.AddressDTO.Country &&

@@ -29,5 +29,5 @@
 
 .heading-title:hover {
     color: white;
-    transform: translateX(4px);
+    transform: translateY(-4px);
 }

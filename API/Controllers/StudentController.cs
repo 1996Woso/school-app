@@ -1,7 +1,9 @@
 
+using API.Extensions;
 using API.Interfaces;
 using API.Models;
 using API.Models.DTOs;
+using API.Models.Pagination;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -20,11 +22,13 @@ namespace API.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> Students()
+        public async Task<IActionResult> Students([FromQuery] StudentParams studentParams)
         {
-            var students = await studentRepository.GetAllAsync();
-            if (students.Count == 0) return NotFound("Users not found.");
+            var students = await studentRepository.GetAllAsync(studentParams);
+            // if (students.Count == 0) return NotFound("No users not found.");
+            Response.AddPaginationHeader(students);
             return Ok(students);
         }
     }
 }
+

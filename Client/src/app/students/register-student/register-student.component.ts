@@ -23,6 +23,7 @@ import { SubmitButtonComponent } from '../../shared/submit-button/submit-button.
 import { StepProgressComponent } from '../../shared/step-progress/step-progress.component';
 import { HeadingComponent } from '../../shared/heading/heading.component';
 import { RadioInputComponent } from '../../_forms/radio-input/radio-input.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register-student',
@@ -42,6 +43,7 @@ import { RadioInputComponent } from '../../_forms/radio-input/radio-input.compon
   styleUrl: './register-student.component.css',
 })
 export class RegisterStudentComponent implements OnInit {
+  private toastr = inject(ToastrService);
   isShadowEnabled = true;
   dynamicTitleClass = 'text-success';
   subClassObject = { 'heading-sub': true, 'text-muted': false };
@@ -109,7 +111,7 @@ export class RegisterStudentComponent implements OnInit {
       secondName: [''],
       lastName: ['', Validators.required],
       identityNumber: ['', Validators.required],
-      gender: ['', Validators.required],
+      gender: ['male'],
       email: [''],
       phone: [''],
       dateOfBirth: ['', Validators.required],
@@ -128,7 +130,7 @@ export class RegisterStudentComponent implements OnInit {
       firstName: ['', Validators.required],
       secondName: [''],
       lastName: ['', Validators.required],
-      gender: ['', Validators.required],
+      gender: ['male'],
       identityNumber: ['', Validators.required],
       relationship: ['', Validators.required],
       email: [''],
@@ -216,10 +218,15 @@ export class RegisterStudentComponent implements OnInit {
       },
     };
     this.studentService.registerStudent(payload).subscribe({
-      next: () => alert('Sudent registerd successfully!'),
-      error: (error) => {
-        alert('Error: ' + error.error);
+      next: () => {
+
       },
+      error: (error) => {
+        this.toastr.error('Error: ' + error.error);
+      },
+      complete: () => {
+        this.toastr.success('Sudent registerd successfully!');
+      }
     });
   }
 }

@@ -42,7 +42,7 @@
               />
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
-              <label style="margin-right: 2rem"><b>Gender:</b></label>
+              <label class="radio"><b>Gender:</b></label>
               <app-radio-input
                 [label]="'Male'"
                 [name]="'gender'"
@@ -214,7 +214,7 @@
               />
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
-              <label style="margin-right: 2rem"><b>Gender:</b></label>
+              <label class="radio"><b>Gender:</b></label>
               <app-radio-input
                 [label]="'Male'"
                 [name]="'gender'"
@@ -354,13 +354,6 @@
           </div>
           <div class="d-flex justify-content-between">
             <app-back-button (click)="back()" />
-            <!-- <button
-              class="btn btn-dark"
-              (click)="register()"
-              [disabled]="!guardianAddressForm.valid && !sameAddress"
-            >
-              Submit 
-            </button> -->
             <app-submit-button
               (click)="register()"
               [disabled]="!guardianAddressForm.valid && !sameAddress"
