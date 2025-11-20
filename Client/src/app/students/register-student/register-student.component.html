@@ -23,12 +23,14 @@
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-text-input
+               [class]="'w-100'"
                 [formControl]="$any(studentForm.controls['firstName'])"
                 [label]="'First Name'"
               />
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(studentForm.controls['secondName'])"
                 [label]="'Second Name'"
               />
@@ -37,6 +39,7 @@
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(studentForm.controls['lastName'])"
                 [label]="'Last Name'"
               />
@@ -61,16 +64,20 @@
                 <span icon> &nbsp; <i class="bi bi-gender-female"></i> </span>
               </app-radio-input>
               <div
-                *ngIf="studentForm.controls['gender'].invalid && studentForm.controls['gender'].touched"
+                *ngIf="
+                  studentForm.controls['gender'].invalid &&
+                  studentForm.controls['gender'].touched
+                "
                 class="invalid-feedback text-start"
               >
-              Gender is required.
+                Gender is required.
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(studentForm.controls['identityNumber'])"
                 [label]="'Id No'"
               />
@@ -78,21 +85,24 @@
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-date-picker
                 [formControl]="$any(studentForm.controls['dateOfBirth'])"
-                [label]="'Date Of Birth'"
-                [maxDate]="studentMinAge"
+                label="Date of Birth"
                 [minDate]="maxAge"
-              />
+                [maxDate]="studentMinAge"
+              >
+              </app-date-picker>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(studentForm.controls['phone'])"
                 [label]="'Phone No'"
               />
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(studentForm.controls['email'])"
                 [label]="'Email'"
               />
@@ -100,7 +110,13 @@
           </div>
 
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
-            <app-next-button (click)="next()" [disabled]="!studentForm.valid" />
+            <app-next-button
+              (click)="next(studentForm.valid)"
+              [disabled]="!studentForm.valid"
+            />
+            <!-- <button class="btn btn-dark" (click)="next()" [disabled]="!studentForm.valid">
+              Next
+            </button> -->
           </div>
         </form>
       </div>
@@ -123,6 +139,7 @@
               class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
             >
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(studentAddressForm.controls['street'])"
                 [label]="'Street'"
               />
@@ -131,6 +148,7 @@
               class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
             >
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(studentAddressForm.controls['suburb'])"
                 [label]="'Suburb'"
               />
@@ -141,6 +159,7 @@
               class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
             >
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(studentAddressForm.controls['city'])"
                 [label]="'City'"
               />
@@ -150,6 +169,7 @@
               class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
             >
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(studentAddressForm.controls['province'])"
                 [label]="'Province'"
               />
@@ -160,6 +180,7 @@
               class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
             >
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(studentAddressForm.controls['country'])"
                 [label]="'Country'"
               />
@@ -168,6 +189,7 @@
               class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
             >
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(studentAddressForm.controls['postalCode'])"
                 [label]="'Postal Code'"
               />
@@ -176,7 +198,7 @@
           <div class="d-flex justify-content-between">
             <app-back-button (click)="back()" />
             <app-next-button
-              (click)="next()"
+              (click)="next(studentAddressForm.valid)"
               [disabled]="!studentAddressForm.valid"
             />
           </div>
@@ -195,12 +217,14 @@
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(guardianForm.controls['firstName'])"
                 [label]="'First Name'"
               />
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(guardianForm.controls['secondName'])"
                 [label]="'Second Name'"
               />
@@ -209,6 +233,7 @@
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(guardianForm.controls['lastName'])"
                 [label]="'Last Name'"
               />
@@ -232,37 +257,44 @@
               >
                 <span icon> &nbsp; <i class="bi bi-gender-female"></i> </span>
               </app-radio-input>
-                 <div
-                *ngIf="studentForm.controls['gender'].invalid && guardianForm.controls['gender'].touched"
+              <div
+                *ngIf="
+                  studentForm.controls['gender'].invalid &&
+                  guardianForm.controls['gender'].touched
+                "
                 class="invalid-feedback text-start"
               >
-              Gender is required.
+                Gender is required.
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(guardianForm.controls['identityNumber'])"
                 [label]="'Id No'"
               />
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
-              <app-text-input
+              <app-select-input
                 [formControl]="$any(guardianForm.controls['relationship'])"
                 [label]="'Relationship'"
+                [options]="relations"
               />
             </div>
           </div>
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(guardianForm.controls['phone'])"
                 [label]="'Phone No'"
               />
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(guardianForm.controls['email'])"
                 [label]="'Email'"
               />
@@ -281,7 +313,7 @@
           <div class="d-flex justify-content-between">
             <app-back-button (click)="back()" />
             <app-next-button
-              (click)="next()"
+              (click)="next(guardianForm.valid)"
               [disabled]="!guardianForm.valid"
             />
           </div>
@@ -302,6 +334,8 @@
               class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
             >
               <app-text-input
+                [class]="'w-100'"
+                [class]="'w-100'"
                 [formControl]="$any(guardianAddressForm.controls['street'])"
                 [label]="'Street'"
               />
@@ -310,6 +344,7 @@
               class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
             >
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(guardianAddressForm.controls['suburb'])"
                 [label]="'Suburb'"
               />
@@ -320,6 +355,7 @@
               class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
             >
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(guardianAddressForm.controls['city'])"
                 [label]="'City'"
               />
@@ -329,6 +365,7 @@
               class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
             >
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(guardianAddressForm.controls['province'])"
                 [label]="'Province'"
               />
@@ -339,6 +376,7 @@
               class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
             >
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(guardianAddressForm.controls['country'])"
                 [label]="'Country'"
               />
@@ -347,6 +385,7 @@
               class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2 form-floating"
             >
               <app-text-input
+                [class]="'w-100'"
                 [formControl]="$any(guardianAddressForm.controls['postalCode'])"
                 [label]="'Postal Code'"
               />
@@ -355,7 +394,7 @@
           <div class="d-flex justify-content-between">
             <app-back-button (click)="back()" />
             <app-submit-button
-              (click)="register()"
+              (click)="register(guardianAddressForm.valid)"
               [disabled]="!guardianAddressForm.valid && !sameAddress"
             />
           </div>
