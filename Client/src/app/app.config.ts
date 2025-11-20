@@ -15,11 +15,10 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([loadingInterceptor])),
     provideAnimations(),
 
-    //For ngx-spinner
     importProvidersFrom(NgxSpinnerModule),
-    //For ngx-toastr
+    
     provideToastr({
-      positionClass: 'toastr-top-center',
+      positionClass: 'toast-bottom-center',
       timeOut: 6000,
       preventDuplicates: true,
       closeButton: false,

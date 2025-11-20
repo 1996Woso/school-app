@@ -1,3 +1,16 @@
+/* html {
+  font-size: 14px;
+} */
+@media (min-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media (max-width: 768px) {
+  html {
+    font-size: 0.6rem !important;
+  }
+}
 .form-control,
 .form-select {
   border: 2px solid #7d7b73;
@@ -26,8 +39,8 @@ label {
   color: #333333af;
   font-weight: bold;
 }
-button {
-  width: 6rem !important;
+button ,a {
+  /* min-width: 6rem !important; */
   font-size: 0.8rem !important;
   font-weight: bold !important;
   text-align: center !important;
@@ -39,7 +52,7 @@ input[type="checkbox"].form-check-input {
   width: 20px;
   height: 20px;
   border: 2px solid #333;
-  border-radius: 50%; /* will override for checkbox below */
+  border-radius: 50%; 
   background-color: white;
   cursor: pointer;
   position: relative;
@@ -48,7 +61,7 @@ input[type="checkbox"].form-check-input {
 
 /* Override shape for checkbox */
 input[type="checkbox"].form-check-input {
-  border-radius: 4px; /* square corners for checkbox */
+  border-radius: 4px;
 }
 
 /* Checked state for radio */
@@ -84,4 +97,9 @@ input[type="checkbox"].form-check-input:checked {
   box-shadow: none;
   border-color: inherit;
   outline: none;
+}
+/* Table styles */
+table{
+  width: 100%;
+  table-layout: auto;
 }

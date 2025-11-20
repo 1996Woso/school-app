@@ -1,12 +1,12 @@
 .heading {
-  background-color: rgba(65, 60, 60, 0.658);
+  background-color: #025752;
   border-radius: 0.1rem;
   border-left: 8px solid rgba(27, 26, 26, 0.645);
   transition: transform 0.9s ease-in-out;
 }
 
 .heading:hover {
-  background-color: rgba(65, 60, 60, 0.8);
+  background-color: #025751c7;
   cursor: pointer;
   border-left: 8px solid rgb(27, 26, 26);
 }

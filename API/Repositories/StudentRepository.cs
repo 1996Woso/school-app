@@ -13,15 +13,40 @@ public class StudentRepository(DataContext dataContext, IAddressRepository addre
 {
     public async Task<PagedList<Student>> GetAllAsync(StudentParams studentParams)
     {
-        var query = dataContext.Students.AsQueryable();
+        var query = dataContext.Students
+                .Include(s => s.Address)
+                .Include(s => s.Guardian)
+                .AsQueryable();
         //Name filtering
         if (!string.IsNullOrWhiteSpace(studentParams.Name))
         {
+            var name = studentParams.Name.Trim().ToLower();
+            /*
+            *Collate(...) ensures case-insensitive comparison without string allocation.
+            *It avoids using ToUpper() and ToLower()
+            */
+            var collate = "SQL_Latin1_General_CP1_CI_As";
             query = query.Where(s =>
-                EF.Functions.Like(s.FirstName, $"%{studentParams.Name}%")
-                || EF.Functions.Like(s.SecondName, $"%{studentParams.Name}%")
-                || EF.Functions.Like(s.LastName, $"%{studentParams.Name}%")
+                EF.Functions.Like(
+                    EF.Functions.Collate(s.FirstName, collate), $"%{name}%"
+                ) ||
+                 EF.Functions.Like(
+                    EF.Functions.Collate(s.SecondName, collate), $"%{name}%"
+                ) ||
+                 EF.Functions.Like(
+                    EF.Functions.Collate(s.LastName, collate), $"%{name}%"
+                ) ||
+                 EF.Functions.Like(
+                    EF.Functions.Collate(s.FullName, collate), $"%{name}%"
+                )
             );
+
+            // query = query.Where(s =>
+            //     EF.Functions.Collate(s.FirstName,collate).Contains(name) ||
+            //     EF.Functions.Collate(s.SecondName ?? "", collate).Contains(name) ||
+            //     EF.Functions.Collate(s.LastName, collate).Contains(name) ||
+            //     EF.Functions.Collate(s.FullName!, collate ).Contains(name) 
+            // );
         }
 
         //Age filtering

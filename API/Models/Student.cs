@@ -19,4 +19,6 @@ public class Student
     //Guadian
     public int GuardianId { get; set; }
     public required Guardian Guardian { get; set; }
+    //Computed columns
+    public  string? FullName {get;set;}
 }

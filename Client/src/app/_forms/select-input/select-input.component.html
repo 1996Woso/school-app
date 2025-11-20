@@ -1,0 +1,20 @@
+<mat-form-field [ngClass]="class()" [ngStyle]="style()">
+  <mat-label>{{ label() }}</mat-label>
+  <mat-select
+    [class.is-invalid]="control.invalid && control.touched"
+    [formControl]="control"
+    (blur)="onTouched()"
+    (selectionChange)="handleValueChange($event.value)"
+  >
+    <mat-option [value]="null">--</mat-option>
+    @for (option of options(); track $index) {
+    <mat-option [value]="optionValueKey() ? option[optionValueKey()] : option">
+      {{ optionLabelKey() ? option[optionLabelKey()]: option }}
+    </mat-option>
+    }
+  </mat-select>
+  <!--Required validation-->
+  @if (control.hasError('required')) {
+  <mat-error>{{ label() }} is required.</mat-error>
+  }
+</mat-form-field>

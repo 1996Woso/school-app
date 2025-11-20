@@ -23,7 +23,7 @@
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-text-input
-               [class]="'w-100'"
+                [class]="'w-100'"
                 [formControl]="$any(studentForm.controls['firstName'])"
                 [label]="'First Name'"
               />
@@ -84,6 +84,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-date-picker
+                [class]="'w-100'"
                 [formControl]="$any(studentForm.controls['dateOfBirth'])"
                 label="Date of Birth"
                 [minDate]="maxAge"
@@ -278,6 +279,7 @@
             </div>
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-select-input
+                [class]="'w-100'"
                 [formControl]="$any(guardianForm.controls['relationship'])"
                 [label]="'Relationship'"
                 [options]="relations"
@@ -303,6 +305,7 @@
           <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mb-2">
               <app-date-picker
+                [class]="'w-100'"
                 [formControl]="$any(guardianForm.controls['dateOfBirth'])"
                 [label]="'Date Of Birth'"
                 [maxDate]="guardianMinAge"

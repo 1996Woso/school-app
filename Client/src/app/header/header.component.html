@@ -1,0 +1,54 @@
+<!--For large screens-->
+<header>
+  <a
+    class="btn"
+    (click)="goToHome()"
+    [class.active-border]="isRouterActive('/')"
+    >Home</a
+  >
+  <nav>
+    <ul>
+      <li>
+        <a
+          class="btn"
+          routerLink="/students"
+          [class.active-border]="isRouterActive('/students')"
+        >
+          Students
+        </a>
+      </li>
+    </ul>
+  </nav>
+</header>
+<!--For small screens-->
+<div #offSecreenMenu class="off-screen-menu" [class.active]="isHamMenuActive">
+  <ul>
+    <li>
+      <a
+        class="btn"
+        (click)="goToHome()"
+        (click)="closeHamMenu()"
+        [class.active-border]="isRouterActive('/')"
+        >Home</a
+      >
+    </li>
+    <li>
+      <a
+        class="btn"
+        routerLink="/students"
+        (click)="closeHamMenu()"
+        [class.active-border]="isRouterActive('/students')"
+      >
+        Students
+      </a>
+    </li>
+  </ul>
+</div>
+<!--Hamburger button-->
+<nav>
+    <div #hamMenu class="ham-menu" [class.active]="isHamMenuActive" (click)="toggleHamMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>

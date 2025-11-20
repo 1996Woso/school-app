@@ -1,0 +1,154 @@
+<div class="row justify-content-center">
+  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
+    <div class="mb-3 mt-3">
+      <a class="btn btn-dark" routerLink="/register-student">
+        Add New Student
+      </a>
+    </div>
+    <form #form="ngForm" (submit)="loadStudents()">
+      <div class="d-flex justify-content-start flex-wrap gap-2">
+        <!--Minimum age-->
+        <div>
+          <app-text-input
+            [style]="{ width: '90px' }"
+            name="minAge"
+            [type]="'number'"
+            [(ngModel)]="studentService.studentParams().minAge"
+            [label]="'Min Age'"
+          />
+        </div>
+        <!--Maximum age-->
+        <div>
+          <app-text-input
+            [style]="{ width: '90px' }"
+            [type]="'number'"
+            name="maxAge"
+            [(ngModel)]="studentService.studentParams().maxAge"
+            [label]="'Max Age'"
+          />
+        </div>
+        <!--Name-->
+        <div>
+          <app-text-input
+            [style]="{ width: '140px' }"
+            name="name"
+            [(ngModel)]="studentService.studentParams().name"
+            [label]="'Name'"
+          />
+        </div>
+        <!--Gender-->
+        <div>
+          <!-- <label class="form-label">Gender</label>
+          <select
+            type="number"
+            class="form-select"
+            name="gender"
+            style="width: 100px"
+            (change)="loadStudents()"
+            [(ngModel)]="studentService.studentParams().gender"
+          >
+            @for (gender of genderList; track gender.value) {
+            <option [value]="gender.value">{{ gender.display }}</option>
+            }
+          </select> -->
+          <app-select-input
+            name="gender"
+            [(ngModel)]="studentService.studentParams().gender"
+            [label]="'Gender'"
+            (change)="loadStudents()"
+            [options]="genderList"
+            [optionLabelKey]="'display'"
+            [optionValueKey]="'value'"
+            [style]="{width: '100px'}"
+          />
+        </div>
+      </div>
+      <!--Action buttons-->
+      <div class="d-flex justify-content-start flex-wrap gap-2 mt-2">
+        <div>
+          <button class="btn btn-dark w-100" type="submit">
+            Apply filters
+          </button>
+        </div>
+        <div>
+          <button
+            class="btn btn-dark w-100"
+            type="submit"
+            (click)="resetFilters()"
+          >
+            Reset filters
+          </button>
+        </div>
+      </div>
+      @if (studentService.paginatedResult()?.pagination?.totalItems) {
+      <div class="d-flex justify-content-end">
+        Page size: &nbsp;
+        <select
+          class="form-select"
+          name="pageSize"
+          style="width: 5rem"
+          (change)="loadStudents()"
+          [(ngModel)]="studentService.studentParams().pageSize"
+        >
+          @for (size of pageSizeList; track $index) {
+          <option [value]="size">{{ size }}</option>
+          }
+        </select>
+      </div>
+      }
+    </form>
+    @if (studentService.paginatedResult()?.pagination?.totalItems){
+    <div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Id No</th>
+            <th>Gender</th>
+            <th>Options</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (student of this.studentService.paginatedResult()?.items; track
+          student.id) {
+          <tr>
+            <td>{{ student.firstName }}</td>
+            <td>{{ student.lastName }}</td>
+            <td>{{ student.identityNumber }}</td>
+            <td>{{ student.gender }}</td>
+            <td>-</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    <div class="d-flex justify-content-between">
+      <p>{{ pages }}</p>
+      <p>{{ items }}</p>
+    </div>
+    <!--Pagination-->
+    <div class="d-flex justify-content-center mt-2">
+      <pagination
+        [boundaryLinks]="true"
+        [totalItems]="
+          (studentService.paginatedResult()?.pagination)!.totalItems
+        "
+        [itemsPerPage]="
+          studentService.paginatedResult()!.pagination!.itemsPerPage
+        "
+        (pageChanged)="pageChanged($event)"
+        [(ngModel)]="studentService.paginatedResult()!.pagination!.currentPage"
+        [maxSize]="10"
+        previousText="&lsaquo;"
+        nextText="&rsaquo;"
+        firstText="&laquo;"
+        lastText="&raquo;"
+      >
+      </pagination>
+    </div>
+    } @else {
+    <app-no-data-found />
+    }
+  </div>
+</div>

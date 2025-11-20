@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data;
 
-public class DataContext: DbContext
+public class DataContext : DbContext
 {
     public DataContext(DbContextOptions options) : base(options)
     {
@@ -35,6 +35,14 @@ public class DataContext: DbContext
             .WithMany(g => g.Students)
             .HasForeignKey(s => s.GuardianId)
             .OnDelete(DeleteBehavior.Restrict);
+
+        //Computed FullName column
+        modelBuilder.Entity<Student>()
+            .Property(s => s.FullName)
+            .HasComputedColumnSql(
+                "LTRIM(RTRIM(FirstName + Case When SecondName Is Null Or Ltrim(Ttrim(SecondName)) = '' Then '' Else ' ' + SecondName End + ' ' + LastName))",
+                stored: true
+            );
     }
-    
+
 }

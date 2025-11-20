@@ -1,0 +1,12 @@
+.container {
+    background-color: rgb(97, 146, 151);
+    text-align: center;
+    margin-top: 2rem;
+    border-radius: 0.4rem;
+    color: white;
+    font-weight:700;
+}
+.bi {
+    color: rgb(56, 56, 58);
+    font-size: 4rem;
+}

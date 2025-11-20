@@ -30,6 +30,7 @@
               "node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "node_modules/ngx-spinner/animations/ball-scale-ripple-multiple.css",
               "node_modules/ngx-toastr/toastr.css",
+              "node_modules/@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -39,8 +40,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "1.5MB",
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",

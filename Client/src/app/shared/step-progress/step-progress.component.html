@@ -4,7 +4,7 @@
          [class.active]="i + 1 <= currentStep"
          [class.completed]="i + 1 < currentStep">
 
-      <ng-container *ngIf="completedSteps[i]; else stepNumber">
+      <ng-container *ngIf="completedSteps[i] === true; else stepNumber">
         ✓
       </ng-container>
       <ng-template #stepNumber>{{ i + 1 }}</ng-template>

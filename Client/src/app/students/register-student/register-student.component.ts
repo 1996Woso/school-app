@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   computed,
   effect,
@@ -12,7 +13,7 @@ import {
   ReactiveFormsModule,
   FormGroup,
 } from '@angular/forms';
-import { StudentService } from '../../_services/student.service';
+import { StudentsService } from '../../_services/students.service';
 import { StudentRegistrationDto } from '../../_interfaces/student-registration-dto';
 import { NgIf } from '@angular/common';
 import { TextInputComponent } from '../../_forms/text-input/text-input.component';
@@ -24,6 +25,8 @@ import { StepProgressComponent } from '../../shared/step-progress/step-progress.
 import { HeadingComponent } from '../../shared/heading/heading.component';
 import { RadioInputComponent } from '../../_forms/radio-input/radio-input.component';
 import { ToastrService } from 'ngx-toastr';
+import { SelectInputComponent } from '../../_forms/select-input/select-input.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-student',
@@ -37,18 +40,21 @@ import { ToastrService } from 'ngx-toastr';
     SubmitButtonComponent,
     StepProgressComponent,
     HeadingComponent,
-    RadioInputComponent
+    RadioInputComponent,
+    SelectInputComponent,
   ],
   templateUrl: './register-student.component.html',
   styleUrl: './register-student.component.css',
 })
 export class RegisterStudentComponent implements OnInit {
+  private changeDetectorRef = inject(ChangeDetectorRef);
   private toastr = inject(ToastrService);
+  private router = inject(Router);
   isShadowEnabled = true;
   dynamicTitleClass = 'text-success';
   subClassObject = { 'heading-sub': true, 'text-muted': false };
   private formBuilder = inject(FormBuilder);
-  private studentService = inject(StudentService);
+  private studentsService = inject(StudentsService);
   step: number = 1;
   currentStep = signal(1);
   steps: string[] = [
@@ -57,6 +63,7 @@ export class RegisterStudentComponent implements OnInit {
     'Guardian Info',
     'Guardian Address',
   ];
+  relations: string[] = ['Father', 'Mother', 'Sibling'];
   completedSteps = signal([false, false, false, false]);
 
   sameAddress = false;
@@ -83,13 +90,17 @@ export class RegisterStudentComponent implements OnInit {
       this.updateCompletedSteps()
     );
   }
-  next() {
-    this.step++;
-    if (this.currentStep() < 4) this.currentStep.update((v) => v + 1);
+  next(isValid: boolean) {
+    if (isValid) {
+      this.step++;
+      if (this.currentStep() < 4) this.currentStep.update((v) => v + 1);
+    }
+    this.changeDetectorRef.detectChanges(); //To solve change detections of (app-text-input and app-step-progress) components
   }
   back() {
     this.step--;
     if (this.currentStep() > 1) this.currentStep.update((v) => v - 1);
+    this.changeDetectorRef.detectChanges(); //To solve change detections of (app-text-input and app-step-progress) components
   }
   updateCompletedSteps() {
     this.completedSteps.set([
@@ -98,6 +109,8 @@ export class RegisterStudentComponent implements OnInit {
       this.guardianForm.valid,
       this.guardianAddressForm.valid,
     ]);
+
+    this.changeDetectorRef.detectChanges(); //To solve change detections of (app-text-input and app-step-progress) components
   }
 
   studentForm: FormGroup = new FormGroup({});
@@ -164,7 +177,8 @@ export class RegisterStudentComponent implements OnInit {
     return new Date(date).toISOString().slice(0, 10);
   }
 
-  register() {
+  register(isValid: boolean) {
+    if (!isValid) return;
     const studentDateOfBirth = this.getDateOnly(
       this.studentForm.get('dateOfBirth')?.value
     );
@@ -217,16 +231,16 @@ export class RegisterStudentComponent implements OnInit {
         },
       },
     };
-    this.studentService.registerStudent(payload).subscribe({
+    this.studentsService.registerStudent(payload).subscribe({
       next: () => {
-
+        this.router.navigateByUrl('/students');
       },
       error: (error) => {
-        this.toastr.error('Error: ' + error.error);
+        this.toastr.error(error.error);
       },
       complete: () => {
         this.toastr.success('Sudent registerd successfully!');
-      }
+      },
     });
   }
 }

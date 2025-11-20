@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class StudentController(IStudentRepository studentRepository) : BaseApiController
+    public class StudentsController(IStudentRepository studentRepository) : BaseApiController
     {
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] StudentRegistrationDTO studentRegistration)
